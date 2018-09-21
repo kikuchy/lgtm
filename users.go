@@ -38,6 +38,7 @@ type (
 		LoadImages(count uint, page uint) ([]Image, error)
 		RandomImageId() (int64, error)
 		FindImageById(id int64) (*Image, error)
+		LoadServers() ([]Server, error)
 	}
 	RepositoryGeneratorFunc func(c echo.Context) Repository
 
@@ -83,6 +84,7 @@ func init() {
 		}
 		return false, nil
 	}))
+	g.GET("/servers", showAllServersGenerator(RepositoryGenerator))
 }
 
 func showAllImagesGenerator(rg RepositoryGeneratorFunc) echo.HandlerFunc {
@@ -156,4 +158,15 @@ func showImageGenerator(rg RepositoryGeneratorFunc) echo.HandlerFunc {
 	}
 }
 
-
+func showAllServersGenerator(rg RepositoryGeneratorFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		r := rg(c)
+		servers, err := r.LoadServers()
+		if err != nil {
+			return err
+		}
+		return c.Render(http.StatusOK, "console.servers.template.html", map[string]interface{}{
+			"servers": servers,
+		})
+	}
+}

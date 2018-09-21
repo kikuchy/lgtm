@@ -14,11 +14,19 @@ import (
 )
 
 const KindImage string = "Image"
+const KindServer string = "Server"
 
 type gcdRepository struct {
 	c context.Context
 }
 
+func (r *gcdRepository) LoadServers() ([]Server, error) {
+	var servers []Server
+	if _, err := datastore.NewQuery(KindServer).Order("-UpdateAt").GetAll(r.c, servers); err != nil {
+		return nil, err
+	}
+	return servers, nil
+}
 
 func (r *gcdRepository) FindImageById(id int64) (*Image, error) {
 	key := datastore.NewKey(r.c, KindImage, "", id, nil)
@@ -44,12 +52,11 @@ func (r *gcdRepository) RandomImageId() (int64, error) {
 	return key.IntID(), nil
 }
 
-
 func (r *gcdRepository) LoadImages(count uint, page uint) ([]Image, error) {
 	query := datastore.
-		NewQuery("Image").
+		NewQuery(KindImage).
 		Limit(int(count)).
-		Offset(int(count * (page - 1))).
+		Offset(int(count*(page-1))).
 		Order("-CreatedAt").
 		Filter("IsDeleted =", false)
 	var images []Image
@@ -82,4 +89,3 @@ func RepositoryGenerator(c echo.Context) Repository {
 		c: appengine.NewContext(c.Request()),
 	}
 }
-

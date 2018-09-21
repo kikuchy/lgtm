@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Servers</title>
+</head>
+<body>
+<table>
+    {{ range $i, $server := .servers }}
+    <tr>
+        <td><a href="{{ $server.Url }}">{{ $server.Url }}</a></td>
+        <td>{{ $server.UpdatedAt }}</td>
+        <td>Delete</td>
+    </tr>
+    {{ end }}
+</table>
+</body>
+</html>
