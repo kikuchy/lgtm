@@ -1,6 +1,10 @@
 runtime: go
 api_version: go1
 
+env_variables:
+  ADMIN_NAME: 'someone'
+  ADMIN_PASS: 'else'
+
 handlers:
 
 - url: /.*

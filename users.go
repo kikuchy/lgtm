@@ -73,6 +73,15 @@ func init() {
 		if username == "" || password == "" {
 			return false, nil
 		}
+		u := cfg.adminName
+		p := cfg.adminPass
+		if u == "" || p == "" {
+			return false, errors.New("username or password is not set")
+		}
+		if username == u && password == p {
+			return true, nil
+		}
+		return false, nil
 	}))
 }
 
@@ -146,3 +155,5 @@ func showImageGenerator(rg RepositoryGeneratorFunc) echo.HandlerFunc {
 		return c.Render(http.StatusOK, "image.detail.template.html", image)
 	}
 }
+
+

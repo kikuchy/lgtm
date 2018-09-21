@@ -4,6 +4,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/labstack/echo"
 )
@@ -14,4 +15,11 @@ func createMux() *echo.Echo {
 	// app engine has it's own "main" wrapper - we just need to hook echo into the default handler
 	http.Handle("/", e)
 	return e
+}
+
+func loadConfig() config {
+	return config{
+		os.Getenv("ADMIN_NAME"),
+		os.Getenv("ADMIN_PASS"),
+	}
 }
