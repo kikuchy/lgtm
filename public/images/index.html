@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LGTM.cf</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a class="is-link" href="/"><h1 class="title">LGTM.cf</h1></a>
+    </div>
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="/g">Random</a>
+            <a class="navbar-item" href="/images">Submit</a>
+            <a class="navbar-item" href="/browse">Browse</a>
+        </div>
+    </div>
+</nav>
+<div class="section">
+    <form method="post">
+        <div class="field">
+            <label class="label" for="image_url">LGTM Image URL</label>
+            <div class="control">
+                <input class="input" type="url" name="image_url" placeholder="https://i.imgur.com/xyz..." />
+            </div>
+        </div>
+        <div class="field is-grouped">
+            <div class="control">
+                <input class="button is-link" type="submit" value="Submit">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ template "header" }}
+</head>
+<body>
+{{ template "navigation" }}
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <figure class="image is-4by3">
+                <img src="{{ .Url }}"/>
+            </figure>
+        </div>
+        <div class="column">
+            <div class="field">
+                <label class="label">Image URL</label>
+                <input class="input" type="text" value="{{ .Url }}" readonly>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
